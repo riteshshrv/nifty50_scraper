@@ -75,8 +75,8 @@ class ScrapeNifty50(object):
             'table', {'id': table_id}
         )
         # Skip the table header
-        table = table[1:]
-        scrips = [Scrip(tr).data for tr in table.find_all('tr')]
+        table_rows = table.find_all('tr')[1:]
+        scrips = [Scrip(row).data for row in table_rows]
 
         return scrips
 
@@ -88,6 +88,6 @@ class ScrapeNifty50(object):
         for type_ in ('gainers', 'losers'):
             gainers_losers_data[type_] = self.get(type_)
 
-        key = "data:%s" % time()
+        key = "data:%s" % int(time())
         self.db.hmset(key, gainers_losers_data)
         # TODO: Set "SETEX" to 10 minutes
