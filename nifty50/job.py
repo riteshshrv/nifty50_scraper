@@ -11,6 +11,7 @@ from selenium.webdriver.support.wait import TimeoutException
 
 from .settings import CONFIG
 from .exceptions import ResourceNotFound
+from .scrip import Scrip
 
 # TODO: Might have to use "pyvirtualdisplay" or "xvfb" for headless browser
 
@@ -58,7 +59,7 @@ class ScrapeNifty50(object):
             html_page = self.browser.page_source
             return self.parser(html_page)
 
-    def get_gainers(self):
+    def scrape_gainers(self):
         """
         Scrape for Nifty50 gainers
         """
@@ -68,11 +69,12 @@ class ScrapeNifty50(object):
         gainers_table = self._get_page_source_with(self.GAINERS_TABLE_ID).find(
             'table', {'id': self.GAINERS_TABLE_ID}
         )
-        # TODO: Implement and use descriptor to store this data as encoded
-        # json into db (Redis)
-        return gainers_table
+        # Skip the table header
+        gainers_table = gainers_table[1:]
+        scrips = [Scrip(tr).data for tr in gainers_table.find_all('tr')]
+        return scrips
 
-    def get_losers(self):
+    def scrape_losers(self):
         """
         Scrape for Nifty50 losers
         """
@@ -82,6 +84,7 @@ class ScrapeNifty50(object):
         losers_table = self._get_page_source_with(self.LOSERS_TABLE_ID).find(
             'table', {'id': self.LOSERS_TABLE_ID}
         )
-        # TODO: Implement and use descriptor to store this data as encoded
-        # json into db (Redis)
-        return losers_table
+        # Skip the table header
+        losers_table = losers_table[1:]
+        scrips = [Scrip(tr).data for tr in losers_table.find_all('tr')]
+        return scrips
