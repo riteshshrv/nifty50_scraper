@@ -6,3 +6,4 @@ __email__ = 'ritesh_shrv@live.com'
 __version__ = '0.1.1'
 
 from .app import NseVisualizer  # noqa
+from .job import ScrapeNifty50  # noqa

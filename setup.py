@@ -9,6 +9,7 @@ requirements = [
     'redis',
     'selenium',
     'cherrypy',
+    'beautifulsoup4',
 ]
 
 test_requirements = []

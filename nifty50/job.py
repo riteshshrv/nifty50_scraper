@@ -68,7 +68,7 @@ class ScrapeNifty50(object):
         tab_id = getattr(self, '%s_TAB_ID' % type_.upper())
         table_id = getattr(self, '%s_TABLE_ID' % type_.upper())
 
-        # Make sure to click gainers tab as data is only availabe for
+        # Make sure to click "type_" tab as data is only availabe for
         # currently active tab
         self.browser.find_element_by_id(tab_id).click()
         table = self._get_page_source_with(table_id).find(

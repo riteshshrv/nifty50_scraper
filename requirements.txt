@@ -4,6 +4,7 @@ bumpversion
 redis
 selenium
 cherrypy
+beautifulsoup4
 
 # Install this package itself
 .
