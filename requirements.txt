@@ -1,5 +1,8 @@
 flake8
 bumpversion
 
+redis
+selenium
+
 # Install this package itself
 .
