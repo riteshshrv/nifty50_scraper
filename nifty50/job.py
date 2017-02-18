@@ -59,32 +59,21 @@ class ScrapeNifty50(object):
             html_page = self.browser.page_source
             return self.parser(html_page)
 
-    def scrape_gainers(self):
+    def get(self, type_='gainers'):
         """
-        Scrape for Nifty50 gainers
+        Common method for fetching data for given table type
         """
+        tab_id = getattr(self, '%s_TAB_ID' % type_.upper())
+        table_id = getattr(self, '%s_TABLE_ID' % type_.upper())
+
         # Make sure to click gainers tab as data is only availabe for
         # currently active tab
-        self.browser.find_element_by_id(self.GAINERS_TAB_ID).click()
-        gainers_table = self._get_page_source_with(self.GAINERS_TABLE_ID).find(
-            'table', {'id': self.GAINERS_TABLE_ID}
+        self.browser.find_element_by_id(tab_id).click()
+        table = self._get_page_source_with(table_id).find(
+            'table', {'id': table_id}
         )
         # Skip the table header
-        gainers_table = gainers_table[1:]
-        scrips = [Scrip(tr).data for tr in gainers_table.find_all('tr')]
-        return scrips
+        table = table[1:]
+        scrips = [Scrip(tr).data for tr in table.find_all('tr')]
 
-    def scrape_losers(self):
-        """
-        Scrape for Nifty50 losers
-        """
-        # Make sure to click losers tab as data is only availabe for
-        # currently active tab
-        self.browser.find_element_by_id(self.LOSERS_TAB_ID).click()
-        losers_table = self._get_page_source_with(self.LOSERS_TABLE_ID).find(
-            'table', {'id': self.LOSERS_TABLE_ID}
-        )
-        # Skip the table header
-        losers_table = losers_table[1:]
-        scrips = [Scrip(tr).data for tr in losers_table.find_all('tr')]
         return scrips
