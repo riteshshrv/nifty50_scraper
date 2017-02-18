@@ -8,6 +8,7 @@ with open('README.md') as readme_file:
 requirements = [
     'redis',
     'selenium',
+    'cherrypy',
 ]
 
 test_requirements = []

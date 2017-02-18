@@ -3,6 +3,7 @@ bumpversion
 
 redis
 selenium
+cherrypy
 
 # Install this package itself
 .
