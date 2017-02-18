@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from time import time
+
 from bs4 import BeautifulSoup
 from redis import StrictRedis
 
@@ -77,3 +79,15 @@ class ScrapeNifty50(object):
         scrips = [Scrip(tr).data for tr in table.find_all('tr')]
 
         return scrips
+
+    def persist(self):
+        """
+        Save scraped data to database (Redis) using Hash Structure
+        """
+        gainers_losers_data = {}
+        for type_ in ('gainers', 'losers'):
+            gainers_losers_data[type_] = self.get(type_)
+
+        key = "data:%s" % time()
+        self.db.hmset(key, gainers_losers_data)
+        # TODO: Set "SETEX" to 10 minutes
