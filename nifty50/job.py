@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import TimeoutException
 
 from .settings import CONFIG
+from .exceptions import ResourceNotFound
 
 # TODO: Might have to use "pyvirtualdisplay" or "xvfb" for headless browser
 
@@ -50,8 +51,9 @@ class ScrapeNifty50(object):
                 EC.visibility_of_element_located((By.ID, element_id))
             )
         except TimeoutException:
-            # TODO: Use a custom exception class and raise that instead
-            raise
+            raise ResourceNotFound(
+                'Element with ID %s was not found' % element_id
+            )
         else:
             html_page = self.browser.page_source
             return self.parser(html_page)
