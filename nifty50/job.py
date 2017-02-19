@@ -34,6 +34,7 @@ class ScrapeNifty50(object):
         self.db = StrictRedis(
             CONFIG['REDIS_HOST'], CONFIG['REDIS_PORT'], CONFIG['REDIS_DB']
         )
+        self.persist()
 
     def _get_browser(self):
         """
