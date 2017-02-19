@@ -5,6 +5,7 @@ redis
 selenium
 cherrypy
 beautifulsoup4
+pyvirtualdisplay
 
 # Install this package itself
 .

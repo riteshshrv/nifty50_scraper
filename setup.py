@@ -10,6 +10,7 @@ requirements = [
     'selenium',
     'cherrypy',
     'beautifulsoup4',
+    'pyvirtualdisplay',
 ]
 
 test_requirements = []
