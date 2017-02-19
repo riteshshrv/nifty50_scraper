@@ -7,9 +7,9 @@ from cherrypy.process.plugins import BackgroundTask
 
 from redis import StrictRedis
 
-from .settings import CONFIG
-from .utils import abs_file_path
-from .job import ScrapeNifty50
+from nifty50.settings import CONFIG
+from nifty50.utils import abs_file_path
+from nifty50.job import ScrapeNifty50
 
 __all__ = ['NseVisualizer']
 
