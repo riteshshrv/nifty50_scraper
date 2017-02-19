@@ -3,10 +3,13 @@
 import json
 
 import cherrypy
+from cherrypy.process.plugins import BackgroundTask
+
 from redis import StrictRedis
 
 from .settings import CONFIG
 from .utils import abs_file_path
+from .job import ScrapeNifty50
 
 __all__ = ['NseVisualizer']
 
@@ -16,9 +19,20 @@ class NseVisualizer(object):
     NSE Visualizer
     """
     def __init__(self):
+        self.scrapper = ScrapeNifty50()
         self.db = StrictRedis(
             CONFIG['REDIS_HOST'], CONFIG['REDIS_PORT'], CONFIG['REDIS_DB']
         )
+        self.start_scheduled_job()
+
+    def start_scheduled_job(self):
+        """
+        Scrape every 5 minutes in background and on a different thread
+        """
+        background_job = BackgroundTask(
+            5 * 60, self.scrapper.persist, bus=cherrypy.engine
+        )
+        background_job.start()
 
     @cherrypy.expose
     def index(self):
