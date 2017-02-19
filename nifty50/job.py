@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
 from time import time
 
 from bs4 import BeautifulSoup
@@ -86,7 +87,7 @@ class ScrapeNifty50(object):
         """
         gainers_losers_data = {}
         for type_ in ('gainers', 'losers'):
-            gainers_losers_data[type_] = self.get(type_)
+            gainers_losers_data[type_] = json.dumps(self.get(type_))
 
         key = "data:%s" % int(time())
         self.db.hmset(key, gainers_losers_data)
