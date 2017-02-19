@@ -24,9 +24,6 @@ function append_to_dom(data) {
 function poll() {
     $.ajax({
         url: "get",
-        data: {
-            "timestamp": (+ new Date() / 1000) | 0
-        }
     }).done(function (data) {
         append_to_dom(data);
     }).always(function () {

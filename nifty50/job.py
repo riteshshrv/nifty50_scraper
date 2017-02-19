@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import json
-from time import time
 
 from bs4 import BeautifulSoup
 from redis import StrictRedis
@@ -89,6 +88,8 @@ class ScrapeNifty50(object):
         for type_ in ('gainers', 'losers'):
             gainers_losers_data[type_] = json.dumps(self.get(type_))
 
-        key = "data:%s" % int(time())
+        # TODO: Shelve using timestamp for now
+        # key = "data:%s" % int(time())
+        key = 'data'
         self.db.hmset(key, gainers_losers_data)
         # TODO: Set "SETEX" to 10 minutes

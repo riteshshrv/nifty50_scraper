@@ -30,13 +30,13 @@ class NseVisualizer(object):
         Find and return data for given timestamp
         """
         try:
-            timestamp = int(timestamp)
+            timestamp = int(float(timestamp))
         except TypeError:
-            timestamp = 0
+            key = 'data'
+        else:
+            key = 'data:%s' % timestamp
 
-        key = 'data:%s' % timestamp
         data = self.db.hgetall(key)
-
         return json.dumps(data)
 
 
