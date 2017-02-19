@@ -1,6 +1,8 @@
 include README.md
 include setup.cfg
-include dev_requirements.txt
+include requirements.txt
+include nifty50/static/*
+include nifty50/templates/*
 
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
