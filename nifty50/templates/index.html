@@ -15,28 +15,33 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 
+  <script type="text/javascript" src="/static/poll.js"></script>
   <link rel="stylesheet" href="static/styles.css">
 </head>
 
 <body class="body">
   <div class="container">
-    <div class="card-deck">
-      <div class="card">
-        <div class="card-block">
-          <h5 class="card-title">Symbol</h5>
-          <ul class="list-group">
-            <li class="list-group-item justify-content-between">
-              Cras justo odio
-              <span class="badge badge-default badge-pill">14</span>
-            </li>
-            <li class="list-group-item justify-content-between">
-              Dapibus ac facilisis in
-              <span class="badge badge-default badge-pill">2</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div id="gainer_scrips" class="card-deck"></div>
   </div>
 </body>
+
+<script id="template" type="x-tmpl-mustache">
+  {{#gainer_scrips}}
+    <div class="card">
+      <div class="card-block">
+        <h5 class="card-title">{{symbol}}</h5>
+          <ul class="list-group">
+            <li class="list-group-item">
+              LTP - {{ltp}}
+            </li>
+            <li class="list-group-item">
+              % Change - {{percent_change}}
+            </li>
+          </ul>
+      </div>
+    </div>
+  {{/gainer_scrips}}
+</script>
+
+
 </html>
