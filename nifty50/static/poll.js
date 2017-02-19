@@ -28,10 +28,11 @@ function poll() {
             "timestamp": (+ new Date() / 1000) | 0
         }
     }).done(function (data) {
-        console.log('fetched request');
         append_to_dom(data);
     }).always(function () {
-        setTimeout(poll, 18000);
+        // Keep polling every 5 minutes
+        var polling_interval = 5 * 60 * 1000;
+        setTimeout(poll, polling_interval);
     })
 }
 
