@@ -12,9 +12,12 @@ function append_to_dom(data) {
     Mustache.parse(template);
 
     var gainers_data = JSON.parse(data.gainers);
-    var rendered = Mustache.render(template, {'gainer_scrips': gainers_data});
+    var losers_data = JSON.parse(data.losers);
+    var gainers_template = Mustache.render(template, {'scrips': gainers_data});
+    var losers_template = Mustache.render(template, {'scrips': losers_data});
 
-    document.getElementById('gainer_scrips').innerHTML = rendered;
+    document.getElementById('gainer_scrips').innerHTML = gainers_template;
+    document.getElementById('loser_scrips').innerHTML = losers_template;
 
 }
 

@@ -22,11 +22,12 @@
 <body class="body">
   <div class="container">
     <div id="gainer_scrips" class="card-deck"></div>
+    <div id="loser_scrips" class="card-deck"></div>
   </div>
 </body>
 
 <script id="template" type="x-tmpl-mustache">
-  {{#gainer_scrips}}
+  {{#scrips}}
     <div class="card">
       <div class="card-block">
         <h5 class="card-title">{{symbol}}</h5>
@@ -40,7 +41,7 @@
           </ul>
       </div>
     </div>
-  {{/gainer_scrips}}
+  {{/scrips}}
 </script>
 
 
