@@ -22,7 +22,7 @@ class NseVisualizer(object):
 
     @cherrypy.expose
     def index(self):
-        return file("index.html")
+        return file(abs_file_path('templates/index.html'))
 
     @cherrypy.expose
     def get(self, timestamp=None):
