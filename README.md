@@ -51,3 +51,4 @@ $ python -m nifty50.app
 `This tool is an example application that can be used for scraping but in no way its
 implied to do so. Use this tool at your own discretion`
 
+![Screenshot](screenshot.png)
