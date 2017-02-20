@@ -32,8 +32,8 @@ $ pip install -r requirements.txt
 
 ## Examples
 ```
->>> from nifty50 import NseVisualizer
->>> scrapper = NseVisualizer()
+>>> from nifty50.job import ScrapeNifty50
+>>> scrapper = ScrapeNifty50()
 >>> gainers = scraper.get('gainers')
 >>> losers = scraper.get('losers')
 ```
@@ -47,8 +47,20 @@ $ # OR
 $ python -m nifty50.app
 ```
 
+![Screenshot](screenshot.png)
+
+## Note
+Using `python app.py` will start a local server, if thats not what you want then
+add these lines in `app.py` in package root:
+```
+global_conf = {"global": {
+    "server.socket_host": '0.0.0.0',
+    "server.socket_port": 8000,
+}}
+cherrypy.config.update(global_conf)
+```
+(Check `develop` branch)
+
 # DISCLAIMER
 `This tool is an example application that can be used for scraping but in no way its
 implied to do so. Use this tool at your own discretion`
-
-![Screenshot](screenshot.png)
